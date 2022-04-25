@@ -73,8 +73,8 @@ cursor: url("./heart.png"), auto;
         }
     }
     function changephoto(){
-        document.getElementById("left").src='./photo/'+photoname[order[currentorder]]+'.jpg';
-        document.getElementById("right").src='./photo/'+photoname[order[currentorder+1]]+'.jpg';
+        document.getElementById("left").src=images[order[currentorder]].src;
+        document.getElementById("right").src=images[order[currentorder+1]].src;
         document.getElementById("left-name").innerText=photoname[order[currentorder]];
         document.getElementById("right-name").innerText=photoname[order[currentorder+1]];
         document.getElementById("left-name").name=order[currentorder];
@@ -82,22 +82,44 @@ cursor: url("./heart.png"), auto;
         currentorder++;
         
     }
+
+    let images = [];
+
+    function preload() {
+        console.log(preload.arguments.length);
+    for(let i = 0; i < preload.arguments.length; i++) {
+
+        images[i] = new Image();
+        images[i].src = preload.arguments[i];
+        console.log(preload.arguments[i]);
+    }
+    }
+    preload(
+            "./photo/꼬치구이.jpg",'./photo/돈까스.jpg','./photo/떡볶이.jpg','./photo/라멘.jpg','./photo/라면.jpg','./photo/삼겹살.jpg',
+        './photo/샐러드.jpg','./photo/소세지.jpg','./photo/스시.jpg','./photo/스테이크.jpg','./photo/요거트.jpg','./photo/짜장면.jpg','./photo/파스타.jpg',
+        './photo/피자.jpg','./photo/햄버거.jpg','./photo/후라이드 치킨.jpg'
+        )
+   
+
     window.addEventListener('load', () => {
-        photoname=['꼬치구이','돈까스','떡볶이','라멘','라면','삼겹살',
-    '샐러드','소세지','스시','스테이크','요거트','짜장면','파스타',
-    '피자','햄버거','후라이드 치킨']
+        photoname=['꼬치구이.jpg','돈까스.jpg','떡볶이.jpg','라멘.jpg','라면.jpg','삼겹살.jpg',
+    '샐러드.jpg','소세지.jpg','스시.jpg','스테이크.jpg','요거트.jpg','짜장면.jpg','파스타.jpg',
+    '피자.jpg','햄버거.jpg','후라이드 치킨.jpg']
+        
+        
+
         for(let i=0; i<16; i++) {
-            num=i;
-            food[i]=photoname[i];
-        }
+                num=i;
+                food[i]=photoname[i];
+            }
         for(let i=0; i<16; i++) order.push(i);
         for(let j=0; j<order.length; j++) {
-            let k=Math.floor(Math.random() * (j+1));
-            [order[j], order[k]] = [order[k], order[j]];
+                let k=Math.floor(Math.random() * (j+1));
+                [order[j], order[k]] = [order[k], order[j]];
         }
     
-        document.getElementById("left").src='./photo/'+photoname[order[0]]+'.jpg';
-        document.getElementById("right").src='./photo/'+photoname[order[1]]+'.jpg';
+        document.getElementById("left").src=images[order[0]].src;
+        document.getElementById("right").src=images[order[1]].src;
         document.getElementById("left-name").innerText=photoname[order[0]];
         document.getElementById("right-name").innerText=photoname[order[1]];
         document.getElementById("left-name").name=order[0];
@@ -109,10 +131,7 @@ cursor: url("./heart.png"), auto;
   <body style="background-color:lightgrey;">
     <audio src="./bgm.mp3" autoplay loop></audio>
     <header class="d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom bg-dark">
-        <a href="/" class="d-flex align-items-cneter mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
-            <img src="./love-color-text-retro.svg" alt="" width="70">
-            <span class="fs-2">　이상형 월드컵</span>
-        </a>
+        <a href="/index.html" style="text-decoration-line:none;"><img src="./love-color-text-retro.svg" alt="" width="120" ><span class="fs-2 text-white"> 이상형 월드컵</span></a>
      </header>
 
     <main>

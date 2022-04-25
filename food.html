@@ -98,7 +98,15 @@ cursor: url("./heart.png"), auto;
         }
     }
     }
-    
+    let allowswitch=0;
+    function allow1() {
+        allowswitch++;
+        if(allowswitch==2) {
+            allowswitch=0;
+            allow();
+        
+        }   
+    }
     function allow() {
         document.getElementById('con').setAttribute('style','pointer-events:true;')
         if(turn==0){
@@ -167,13 +175,13 @@ cursor: url("./heart.png"), auto;
 
                 <div id="divleft" class="col-xxl-6" style="padding:0px">
                     <div class="left-box">
-                        <img id="left" src="" class="img-fluid" alt="" width=100% onclick="chooseleft(event);">
+                        <img id="left" src="" class="img-fluid" alt="" width=100% onclick="chooseleft(event);" onload="allow1()";>
                         <h1 id="left-name" style="position:relative; bottom:0px;" class="display-2 fw-normal text-white bg-dark text-center"></h1>
                     </div>
                 </div>
                 <div id="divright" class="col-xxl-6" style="padding:0px">
                     <div class="right-box">
-                        <img id="right" name="" src="" class="img-fluid" alt="" width="100%"  onclick="chooseright(event)";  onload="allow()";>
+                        <img id="right" name="" src="" class="img-fluid" alt="" width="100%"  onclick="chooseright(event)";  onload="allow1()";>
                         <h1 id="right-name" name="" style="position:relative; bottom:0px;" class="display-2 fw-normal text-white bg-dark text-center"></h1>
                     </div>
                 </div>

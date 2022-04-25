@@ -88,25 +88,29 @@ cursor: url("./heart.png"), auto;
     function preload() {
         console.log(preload.arguments.length);
     for(let i = 0; i < preload.arguments.length; i++) {
-
         images[i] = new Image();
         images[i].src = preload.arguments[i];
         console.log(preload.arguments[i]);
+        if(i==15) {
+            var removing = document.getElementById('loadicon').firstChild;
+            document.getElementById('loadicon').removeChild(removing);
+            
+        }
     }
     }
+   
+   
+
+    window.addEventListener('load', () => {
+        photoname=['꼬치구이','돈까스','떡볶이','라멘','라면','삼겹살',
+    '샐러드','소세지','스시','스테이크','요거트','짜장면','파스타',
+    '피자','햄버거','후라이드 치킨']
+        
     preload(
             "./photo/꼬치구이.jpg",'./photo/돈까스.jpg','./photo/떡볶이.jpg','./photo/라멘.jpg','./photo/라면.jpg','./photo/삼겹살.jpg',
         './photo/샐러드.jpg','./photo/소세지.jpg','./photo/스시.jpg','./photo/스테이크.jpg','./photo/요거트.jpg','./photo/짜장면.jpg','./photo/파스타.jpg',
         './photo/피자.jpg','./photo/햄버거.jpg','./photo/후라이드 치킨.jpg'
         )
-   
-
-    window.addEventListener('load', () => {
-        photoname=['꼬치구이.jpg','돈까스.jpg','떡볶이.jpg','라멘.jpg','라면.jpg','삼겹살.jpg',
-    '샐러드.jpg','소세지.jpg','스시.jpg','스테이크.jpg','요거트.jpg','짜장면.jpg','파스타.jpg',
-    '피자.jpg','햄버거.jpg','후라이드 치킨.jpg']
-        
-        
 
         for(let i=0; i<16; i++) {
                 num=i;
@@ -135,12 +139,18 @@ cursor: url("./heart.png"), auto;
      </header>
 
     <main>
-   
+     
+          </div>
             <h1 id="round" class="display-2 fw-normal text-white bg-danger text-center">16강</h1>
             <div id="final" class="text-center"></div>
             <h1 id="finalname"></h1>
+
+   
+        
         <div class="container-fluid">
             <div class="row">
+            <div id="loadicon"><h1>Loading... Due to very slow loading on GitHub Page, it may take few minutes on the first run... <div class="spinner-border" role="status"></div></h1></div>
+
                 <div id="divleft" class="col-xxl-6" style="padding:0px">
                     <div class="left-box">
                         <img id="left" src="" class="img-fluid" alt="" width=100% onclick="chooseleft(event);">

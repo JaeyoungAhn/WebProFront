@@ -26,12 +26,16 @@ cursor: url("./heart.png"), auto;
     function chooseleft(event) {
         delnum=document.getElementById('right-name').name;
         choose(event);
+      
+       
     }
     function chooseright(event) {
         delnum=document.getElementById('left-name').name;
         choose(event);        
+   
     }
     function choose(event){
+        document.getElementById('con').setAttribute('style','pointer-events:none;')
         var audio = new Audio('./ping.mp3');
         audio.play();
         deletenum(delnum);
@@ -61,8 +65,10 @@ cursor: url("./heart.png"), auto;
                }
             currentorder=0;    
             }
-            changephoto();    
+            changephoto();
+             
         }     
+
     }
     function deletenum() {
         for(var i=0; i< order.length; i++){
@@ -73,31 +79,59 @@ cursor: url("./heart.png"), auto;
         }
     }
     function changephoto(){
-        document.getElementById("left").src='./photo/'+photoname[order[currentorder]]+'.jpg';
-        document.getElementById("right").src='./photo/'+photoname[order[currentorder+1]]+'.jpg';
+        document.getElementById("left").src=images[order[currentorder]].src;
+        document.getElementById("right").src=images[order[currentorder+1]].src;
         document.getElementById("left-name").innerText=photoname[order[currentorder]];
         document.getElementById("right-name").innerText=photoname[order[currentorder+1]];
         document.getElementById("left-name").name=order[currentorder];
         document.getElementById("right-name").name=order[currentorder+1];
         currentorder++;
+        document.getElementById('con').setAttribute('style','pointer-events:true;')
+        
         
     }
+
+    let images = [];
+
+    function preload() {
+        console.log(preload.arguments.length);
+    for(let i = 0; i < preload.arguments.length; i++) {
+        images[i] = new Image();
+        images[i].src = preload.arguments[i];
+        console.log(preload.arguments[i]);
+        if(i==15) {
+            var removing = document.getElementById('loadicon').firstChild;
+            document.getElementById('loadicon').removeChild(removing);
+            
+        }
+    }
+    }
+   
+   
+
     window.addEventListener('load', () => {
         photoname=['강아지','고양이','곰','기니 피그','기린','독수리',
         '라쿤','미어캣','백조','부엉이','사자','여우','코끼리','토끼',
         '펭귄','호랑이']
+        
+    preload(
+            "./photo/강아지.jpg",'./photo/고양이.jpg','./photo/곰.jpg','./photo/기니 피그.jpg','./photo/기린.jpg','./photo/독수리.jpg',
+        './photo/라쿤.jpg','./photo/미어캣.jpg','./photo/백조.jpg','./photo/부엉이.jpg','./photo/사자.jpg','./photo/여우.jpg','./photo/코끼리.jpg',
+        './photo/토끼.jpg','./photo/펭귄.jpg','./photo/호랑이.jpg'
+        )
+
         for(let i=0; i<16; i++) {
-            num=i;
-            food[i]=photoname[i];
-        }
+                num=i;
+                food[i]=photoname[i];
+            }
         for(let i=0; i<16; i++) order.push(i);
         for(let j=0; j<order.length; j++) {
-            let k=Math.floor(Math.random() * (j+1));
-            [order[j], order[k]] = [order[k], order[j]];
+                let k=Math.floor(Math.random() * (j+1));
+                [order[j], order[k]] = [order[k], order[j]];
         }
     
-        document.getElementById("left").src='./photo/'+photoname[order[0]]+'.jpg';
-        document.getElementById("right").src='./photo/'+photoname[order[1]]+'.jpg';
+        document.getElementById("left").src=images[order[0]].src;
+        document.getElementById("right").src=images[order[1]].src;
         document.getElementById("left-name").innerText=photoname[order[0]];
         document.getElementById("right-name").innerText=photoname[order[1]];
         document.getElementById("left-name").name=order[0];
@@ -109,16 +143,22 @@ cursor: url("./heart.png"), auto;
   <body style="background-color:lightgrey;">
     <audio src="./bgm.mp3" autoplay loop></audio>
     <header class="d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom bg-dark">
-        <a href="WebProFront/index.html" style="text-decoration-line:none;"><img src="./love-color-text-retro.svg" alt="" width="120" ><span class="fs-2 text-white"> 이상형 월드컵</span></a>
+        <a href="/index.html" style="text-decoration-line:none;"><img src="./love-color-text-retro.svg" alt="" width="120" ><span class="fs-2 text-white"> 이상형 월드컵</span></a>
      </header>
 
     <main>
-   
+     
+          </div>
             <h1 id="round" class="display-2 fw-normal text-white bg-danger text-center">16강</h1>
             <div id="final" class="text-center"></div>
             <h1 id="finalname"></h1>
-        <div class="container-fluid">
+
+   
+        
+        <div id="con" class="container-fluid">
             <div class="row">
+            <div id="loadicon"><h1>Downloading images... Due to very slow loading on GitHub Page, it may take few minutes on the first run... <div class="spinner-border" role="status"></div></h1></div>
+
                 <div id="divleft" class="col-xxl-6" style="padding:0px">
                     <div class="left-box">
                         <img id="left" src="" class="img-fluid" alt="" width=100% onclick="chooseleft(event);">
@@ -138,3 +178,8 @@ cursor: url("./heart.png"), auto;
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
   </body>
 </html>
+
+
+
+
+

@@ -20,8 +20,8 @@ cursor: url("./heart.png"), auto;
         }
   </style>
   <script>
-    var audio = new Audio('./ping.mp3');
-    var audio = new Audio('./tada.mp3');
+    var audio1 = new Audio('./ping.mp3');
+    var audio2 = new Audio('./tada.mp3');
     currentorder=1;
     food = {}
     order=[];
@@ -38,10 +38,10 @@ cursor: url("./heart.png"), auto;
     }
     function choose(event){
         document.getElementById('con').setAttribute('style','pointer-events:none;')
-        audio.play();
+        audio1.play();
         deletenum(delnum);
         if(order.length==1) {
-            audio.play();
+            audio2.play();
             var deleteleft = document.getElementById('divleft');
             var deleteright = document.getElementById('divright');
             deleteleft.parentNode.removeChild(deleteleft);
@@ -86,9 +86,6 @@ cursor: url("./heart.png"), auto;
         document.getElementById("left-name").name=order[currentorder];
         document.getElementById("right-name").name=order[currentorder+1];
         currentorder++;
-        document.getElementById('con').setAttribute('style','pointer-events:true;')
-        
-        
     }
 
     let images = [];
@@ -105,6 +102,9 @@ cursor: url("./heart.png"), auto;
             
         }
     }
+    }
+    function allow() {
+        document.getElementById('con').setAttribute('style','pointer-events:true;')
     }
    
    
@@ -167,7 +167,7 @@ cursor: url("./heart.png"), auto;
                 </div>
                 <div id="divright" class="col-xxl-6" style="padding:0px">
                     <div class="right-box">
-                        <img id="right" name="" src="" class="img-fluid" alt="" width="100%"  onclick="chooseright(event);">
+                        <img id="right" name="" src="" class="img-fluid" alt="" width="100%"  onclick="chooseright(event)";  onload="allow()";>
                         <h1 id="right-name" name="" style="position:relative; bottom:0px;" class="display-2 fw-normal text-white bg-dark text-center"></h1>
                     </div>
                 </div>

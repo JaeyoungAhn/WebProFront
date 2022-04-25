@@ -81,15 +81,10 @@ cursor: url("./heart.png"), auto;
     function changephoto(){
         document.getElementById("left").src=images[order[currentorder]].src;
         document.getElementById("right").src=images[order[currentorder+1]].src;
-        document.getElementById("left-name").innerText=photoname[order[currentorder]];
-        document.getElementById("right-name").innerText=photoname[order[currentorder+1]];
-        document.getElementById("left-name").name=order[currentorder];
-        document.getElementById("right-name").name=order[currentorder+1];
-        currentorder++;
     }
 
     let images = [];
-
+    let turn = 0;
     function preload() {
         console.log(preload.arguments.length);
     for(let i = 0; i < preload.arguments.length; i++) {
@@ -103,8 +98,19 @@ cursor: url("./heart.png"), auto;
         }
     }
     }
+    
     function allow() {
         document.getElementById('con').setAttribute('style','pointer-events:true;')
+        if(turn==0){
+            turn=1;
+        }
+        else if(turn==1) {
+            document.getElementById("left-name").innerText=photoname[order[currentorder]];
+            document.getElementById("right-name").innerText=photoname[order[currentorder+1]];
+            document.getElementById("left-name").name=order[currentorder];
+            document.getElementById("right-name").name=order[currentorder+1];
+            currentorder++;
+        }
     }
    
    

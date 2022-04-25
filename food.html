@@ -26,12 +26,16 @@ cursor: url("./heart.png"), auto;
     function chooseleft(event) {
         delnum=document.getElementById('right-name').name;
         choose(event);
+      
+       
     }
     function chooseright(event) {
         delnum=document.getElementById('left-name').name;
         choose(event);        
+   
     }
     function choose(event){
+        document.getElementById('con').setAttribute('style','pointer-events:none;')
         var audio = new Audio('./ping.mp3');
         audio.play();
         deletenum(delnum);
@@ -61,8 +65,10 @@ cursor: url("./heart.png"), auto;
                }
             currentorder=0;    
             }
-            changephoto();    
+            changephoto();
+             
         }     
+
     }
     function deletenum() {
         for(var i=0; i< order.length; i++){
@@ -80,6 +86,8 @@ cursor: url("./heart.png"), auto;
         document.getElementById("left-name").name=order[currentorder];
         document.getElementById("right-name").name=order[currentorder+1];
         currentorder++;
+        document.getElementById('con').setAttribute('style','pointer-events:true;')
+        
         
     }
 
@@ -135,7 +143,7 @@ cursor: url("./heart.png"), auto;
   <body style="background-color:lightgrey;">
     <audio src="./bgm.mp3" autoplay loop></audio>
     <header class="d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom bg-dark">
-        <a href="/index.html" style="text-decoration-line:none;"><img src="./love-color-text-retro.svg" alt="" width="120" ><span class="fs-2 text-white"> 이상형 월드컵</span></a>
+        <a href="WebProFront/index.html" style="text-decoration-line:none;"><img src="./love-color-text-retro.svg" alt="" width="120" ><span class="fs-2 text-white"> 이상형 월드컵</span></a>
      </header>
 
     <main>
@@ -147,9 +155,9 @@ cursor: url("./heart.png"), auto;
 
    
         
-        <div class="container-fluid">
+        <div id="con" class="container-fluid">
             <div class="row">
-            <div id="loadicon"><h1>Loading... Due to very slow loading on GitHub Page, it may take few minutes on the first run... <div class="spinner-border" role="status"></div></h1></div>
+            <div id="loadicon"><h1>Downloading images... Due to very slow loading on GitHub Page, it may take few minutes on the first run... <div class="spinner-border" role="status"></div></h1></div>
 
                 <div id="divleft" class="col-xxl-6" style="padding:0px">
                     <div class="left-box">

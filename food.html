@@ -142,6 +142,23 @@
     //     './photo/샐러드.jpg','./photo/소세지.jpg','./photo/스시.jpg','./photo/스테이크.jpg','./photo/요거트.jpg','./photo/짜장면.jpg','./photo/파스타.jpg',
     //     './photo/피자.jpg','./photo/햄버거.jpg','./photo/후라이드 치킨.jpg'
     //     )
+    function safe() {
+        var request = new XMLHttpRequest();
+        console.log(request.readyState);
+        console.log(request.status);
+        request.onreadystatechange = function() {
+        if (request.readyState==4 && request.status==200) {
+            console.log(request.readyState);
+        console.log(request.status);
+            start();
+
+    }
+   
+    console.log(request.readyState);
+        console.log(request.status);
+}
+
+    }
 
     function start() {
         var removing = document.getElementById('loadicon').firstChild;
@@ -175,7 +192,7 @@
         console.log("hi");
         loadImages([ "./photo/꼬치구이.jpg",'./photo/돈까스.jpg','./photo/떡볶이.jpg','./photo/라멘.jpg','./photo/라면.jpg','./photo/삼겹살.jpg',
     './photo/샐러드.jpg','./photo/소세지.jpg','./photo/스시.jpg','./photo/스테이크.jpg','./photo/요거트.jpg','./photo/짜장면.jpg','./photo/파스타.jpg',
-    './photo/피자.jpg','./photo/햄버거.jpg','./photo/후라이드 치킨.jpg']).then(start());
+    './photo/피자.jpg','./photo/햄버거.jpg','./photo/후라이드 치킨.jpg']).then(safe());
     })
   </script>
 

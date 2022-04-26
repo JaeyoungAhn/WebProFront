@@ -8,39 +8,33 @@
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 
-    <title>Hello, world!</title>
-    
+    <title>프로그래밍 언어 월드컵</title>
+
   </head>
   <style>
-   .row {
-       position:absolute;
-   }
    body {
-cursor: url("./heart.png"), auto;
+    cursor: url("./heart.png"), auto;
         }
   </style>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
   <script>
-    var audio1 = new Audio('./ping.mp3');
-    var audio2 = new Audio('./tada.mp3');
     currentorder=1;
-    food = {}
     order=[];
     function chooseleft(event) {
         delnum=document.getElementById('right-name').name;
         choose(event);
-      
-       
     }
     function chooseright(event) {
         delnum=document.getElementById('left-name').name;
-        choose(event);        
-   
+        choose(event);      
     }
     function choose(event){
-        document.getElementById('con').setAttribute('style','pointer-events:none;')
+        document.getElementById('con').setAttribute('style','pointer-events:none;') // 마우스 동작 막음
+        var audio1 = new Audio('./ping.mp3');
         audio1.play();
-        deletenum(delnum);
-        if(order.length==1) {
+        deletenum(delnum); // 반대 것에 대한 원소를 삭제
+        if(order.length==1) { // 우승자
+            var audio2 = new Audio('./tada.mp3');
             audio2.play();
             var deleteleft = document.getElementById('divleft');
             var deleteright = document.getElementById('divright');
@@ -53,7 +47,7 @@ cursor: url("./heart.png"), auto;
             lastname.innerText=event.target.nextSibling.nextSibling.innerText;
         }   
         else{
-            if(order.length==8 || order.length==4 || order.length==2){
+            if(order.length==8 || order.length==4 || order.length==2){ // 한바퀴 종료
                if(order.length==8) {
                 document.getElementById('round').innerText="8강";
                }
@@ -65,8 +59,7 @@ cursor: url("./heart.png"), auto;
                }
             currentorder=0;    
             }
-            changephoto();
-             
+            changephoto(); // 사진 바꾸기
         }     
 
     }
@@ -85,22 +78,18 @@ cursor: url("./heart.png"), auto;
 
     let images = [];
     let turn = 0;
-    function preload() {
-        console.log(preload.arguments.length);
-    for(let i = 0; i < preload.arguments.length; i++) {
-        images[i] = new Image();
-        images[i].src = preload.arguments[i];
-        console.log(preload.arguments[i]);
-        if(i==15) {
-            var removing = document.getElementById('loadicon').firstChild;
-            document.getElementById('loadicon').removeChild(removing);
-            
-        }
+
+    let allowswitch=0;
+    function allow1() {
+        allowswitch++;
+        if(allowswitch==2) {
+            allowswitch=0;
+            allow();
+        
+        }   
     }
-    }
-    
     function allow() {
-        document.getElementById('con').setAttribute('style','pointer-events:true;')
+        document.getElementById('con').setAttribute('style','pointer-events:true;') // 마우스 가능
         if(turn==0){
             turn=1;
         }
@@ -112,24 +101,33 @@ cursor: url("./heart.png"), auto;
             currentorder++;
         }
     }
-   
-   
+    
+    async function loadImages(imageUrlArray) {
+        promiseArray = [];
+        images = [];
 
-    window.addEventListener('load', () => {
+        for (let imageUrl of imageUrlArray) {
+            promiseArray.push(new Promise(resolve => {
+                const img = new Image();
+                img.onload = resolve;
+                img.src = imageUrl;
+                images.push(img);
+
+            }))
+
+        }
+
+        await Promise.all(promiseArray);
+        return images;
+    }
+
+    function start() {
+        var removing = document.getElementById('loadicon').firstChild;
+        document.getElementById('loadicon').removeChild(removing);
+
         photoname=['C','C++','CSharp','GO','JAVA','JavaScript',
     'Kotlin','MATLAB','Perl','PHP','Python','R','Ruby',
     'Scala','SWIFT','VisualBasic']
-        
-    preload(
-            "./photo/C.jpg",'./photo/C++.jpg','./photo/CSharp.jpg','./photo/GO.jpg','./photo/JAVA.jpg','./photo/JavaScript.jpg',
-        './photo/Kotlin.jpg','./photo/MATLAB.jpg','./photo/Perl.jpg','./photo/PHP.jpg','./photo/Python.jpg','./photo/R.jpg','./photo/Ruby.jpg',
-        './photo/Scala.jpg','./photo/SWIFT.jpg','./photo/VisualBasic.jpg'
-        )
-
-        for(let i=0; i<16; i++) {
-                num=i;
-                food[i]=photoname[i];
-            }
         for(let i=0; i<16; i++) order.push(i);
         for(let j=0; j<order.length; j++) {
                 let k=Math.floor(Math.random() * (j+1));
@@ -143,7 +141,13 @@ cursor: url("./heart.png"), auto;
         document.getElementById("left-name").name=order[0];
         document.getElementById("right-name").name=order[1];
     }
-    );
+
+    $(window).on('load', function () {
+        loadImages(['./photo/C.jpg','./photo/C++.jpg','./photo/CSharp.jpg','./photo/GO.jpg','./photo/JAVA.jpg','./photo/JavaScript.jpg',
+        './photo/Kotlin.jpg','./photo/MATLAB.jpg','./photo/Perl.jpg','./photo/PHP.jpg','./photo/Python.jpg','./photo/R.jpg','./photo/Ruby.jpg',
+        './photo/Scala.jpg','./photo/SWIFT.jpg','./photo/VisualBasic.jpg']).then(start());
+    })
+        
   </script>
 
   <body style="background-color:lightgrey;">
@@ -152,34 +156,29 @@ cursor: url("./heart.png"), auto;
         <a href="index.html" style="text-decoration-line:none;"><img src="./love-color-text-retro.svg" alt="" width="120" ><span class="fs-2 text-white"> 이상형 월드컵</span></a>
      </header>
 
-    <main>
-     
+    <main id="con">
           </div>
             <h1 id="round" class="display-2 fw-normal text-white bg-danger text-center">16강</h1>
             <div id="final" class="text-center"></div>
             <h1 id="finalname"></h1>
-
-   
         
-        <div id="con" class="container-fluid">
-            <div class="row">
             <div id="loadicon"><h1>Downloading images... Due to very slow loading on GitHub Page, it may take few minutes on the first run... <div class="spinner-border" role="status"></div></h1></div>
-
-                <div id="divleft" class="col-xxl-6" style="padding:0px">
-                    <div class="left-box">
-                        <img id="left" src="" class="img-fluid" alt="" width=100% onclick="chooseleft(event); ">
-                        <h1 id="left-name" style="position:relative; bottom:0px;" class="display-2 fw-normal text-white bg-dark text-center"></h1>
-                    </div>
-                </div>
-                <div id="divright" class="col-xxl-6" style="padding:0px">
+          
+            <div style="display:flex; padding:0px;">
+                <div id="divright" style="width:50%; padding:0px">
                     <div class="right-box">
-                        <img id="right" name="" src="" class="img-fluid" alt="" width="100%"  onclick="chooseright(event)";  onload="allow()";>
+                        <img id="right" src="" alt="" width="100%"  onclick="chooseright(event)";  onload="allow1()";>
                         <h1 id="right-name" name="" style="position:relative; bottom:0px;" class="display-2 fw-normal text-white bg-dark text-center"></h1>
                     </div>
                 </div>
-          
+                <div id="divleft" style="width:50%; padding:0px">
+                    <div class="left-box">
+                        <img id="left" src="" alt="" width="100%" onclick="chooseleft(event);" onload="allow1()";>
+                        <h1 id="left-name" style="position:relative; bottom:0px;" class="display-2 fw-normal text-white bg-dark text-center"></h1>
+                    </div>
+                </div>
             </div>
-        </div>
+       
     </main>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
   </body>

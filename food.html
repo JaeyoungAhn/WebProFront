@@ -19,6 +19,7 @@
     cursor: url("./heart.png"), auto;
         }
   </style>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
   <script>
     currentorder=1;
     food = {}
@@ -171,12 +172,15 @@
         console.log("hihi");
     }
 
-    window.addEventListener('load', () => {
+
+
+    $(window).on('load', function () {
         console.log("hi");
         loadImages([ "./photo/꼬치구이.jpg",'./photo/돈까스.jpg','./photo/떡볶이.jpg','./photo/라멘.jpg','./photo/라면.jpg','./photo/삼겹살.jpg',
     './photo/샐러드.jpg','./photo/소세지.jpg','./photo/스시.jpg','./photo/스테이크.jpg','./photo/요거트.jpg','./photo/짜장면.jpg','./photo/파스타.jpg',
     './photo/피자.jpg','./photo/햄버거.jpg','./photo/후라이드 치킨.jpg']).then(start());
     })
+        
   </script>
 
   <body style="background-color:lightgrey;">
